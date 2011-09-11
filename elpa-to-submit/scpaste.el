@@ -93,7 +93,7 @@ You must have write-access to this directory via `scp'.")
   "HTML message to place at the bottom of each file.")
 
 ;; To set defvar while developing: (load-file (buffer-file-name))
-(defvar scpaste-el-location "/Users/jmatt/.emacs.d/vendor/emacs-starter-kit/elpa-to-submit/scpaste.el")
+(defvar scpaste-el-location "/Users/jmatt/.emacs.d/vendor/emacs-starter-kit/elpa-to-submit/scpastejmatt.el")
 ;;(defvar scpaste-el-location load-file-name)
 
 ;;;###autoload
