@@ -93,7 +93,7 @@ You must have write-access to this directory via `scp'.")
   "HTML message to place at the bottom of each file.")
 
 ;; To set defvar while developing: (load-file (buffer-file-name))
-(defvar scpaste-el-location "scpastejmatt.el")
+(defvar scpaste-el-location "/Users/jmatt/.emacs.d/vendor/emacs-starter-kit/elpa-to-submit/scpastejmatt.el")
 ;;(defvar scpaste-el-location load-file-name)
 
 ;;;###autoload
@@ -154,29 +154,20 @@ You must have write-access to this directory via `scp'.")
          (files (shell-command-to-string (concat "ssh -p " port " "
                                                  (car port-parts)
                                                  " ls " (cadr dest-parts))))
-         (rahr (print "here0"))
          (file-list (split-string files "\n")))
-    
-    ;;(print files)
-    ;;(print (butlast file-list))
-    ;;(print (list "rahr " dest-parts " " port-parts " " port))
     (save-excursion
       (with-temp-buffer
-        (print scpaste-el-location)
         (if scpaste-el-location (insert-file-contents scpaste-el-location)
-          (insert-file-contents "scpastejmatt.el"))
-        (print "here.2")
+          (insert-file-contents "/Users/jmatt/.emacs.d/vendor/emacs-starter-kit/elpa-to-submit/scpastejmatt.el"))
         (goto-char (point-min))
         (search-forward ";;; Commentary")
         (forward-line -1)
         (insert "\n;;; Pasted Files\n\n")
-        (print "here2")
         (dolist (file (butlast file-list))
           (when (and (string-match "\\.html$" file)
                      (not (string-match "private" file)))
             (insert (concat ";; * <" scpaste-http-destination "/" file ">\n"))))
         (emacs-lisp-mode) (font-lock-fontify-buffer) (rename-buffer "JMatt's SCPaste")
-        (print "here3")
         (write-file "/tmp/scpaste-index")
         (scpaste "index")))))
 
